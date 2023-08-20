@@ -23,7 +23,7 @@ namespace RDV_Backend.Data
             using (IDbConnection connection = new SqlConnection(Helper.CnnVal("RDV-Database")))
             {
                 // Define the stored procedure name
-                string storedProcedureName = "GetUserByUsernameAndPassword";
+                string storedProcedureName = "User_GetByUsernameAndPassword";
 
                 // Create a dynamic parameter object to pass input values to the stored procedure
                 var parameters = new
