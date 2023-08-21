@@ -34,6 +34,40 @@ namespace RDV_Backend.Data
                 return connection.Query<Appointment>(storedProcedureName, commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public void DeleteAppointment(int appointmentId)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("RDV-Database")))
+            {
+                string storedProcedureName = "Appointment_DeleteById";
+
+                var parameters = new
+                {
+                    appointmentId
+                };
+
+                connection.Query(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void UpdateAppointment(int appointmentId, Appointment updatedAppointment)
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("RDV-Database")))
+            {
+                string storedProcedureName = "Appointment_Update";
+
+                var parameters = new
+                {
+                    appointmentId,
+                    userId = updatedAppointment.User_Id,
+                    clientName = updatedAppointment.Client_Name,
+                    appointmentDateTime = updatedAppointment.Appointment_Date,
+                    appointmentSubject = updatedAppointment.Appointment_Subject
+                };
+
+                connection.Query(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+
     }
 
 }

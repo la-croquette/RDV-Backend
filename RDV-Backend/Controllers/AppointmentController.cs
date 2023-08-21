@@ -51,6 +51,39 @@ namespace RDV_Backend.Controllers
                 return new JsonResult(new { success = false, message = "Failed to get appointments: " + ex.Message });
             }
         }
+        [HttpDelete("{id}")]
+        public JsonResult DeleteAppointment(int id)
+        {
+            AppointmentAccess appointmentAccess = new AppointmentAccess();
+
+            try
+            {
+                // 调用 DeleteAppointment 方法来删除约会
+                appointmentAccess.DeleteAppointment(id);
+                return new JsonResult(new { success = true, message = "Appointment deleted successfully" });
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { success = false, message = "Failed to delete appointment: " + ex.Message });
+            }
+        }
+        [HttpPut("{id}")]
+        public JsonResult UpdateAppointment(int id, Appointment updatedAppointment)
+        {
+            AppointmentAccess appointmentAccess = new AppointmentAccess();
+
+            try
+            {
+                // 调用 UpdateAppointment 方法来更新约会
+                appointmentAccess.UpdateAppointment(id, updatedAppointment);
+                return new JsonResult(new { success = true, message = "Appointment updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(new { success = false, message = "Failed to update appointment: " + ex.Message });
+            }
+        }
+
 
     }
 }
