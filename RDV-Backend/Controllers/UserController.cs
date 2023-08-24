@@ -20,7 +20,7 @@ namespace RDV_Backend.Controllers
 
             if (users.Count == 0)
             {
-                return new JsonResult(new { success = false, message = "Login failed: User not found" });
+                return new JsonResult(new { success = false, message = "Login failed: Name and password do not match" });
             }
 
             User loggedInUser = users[0];
